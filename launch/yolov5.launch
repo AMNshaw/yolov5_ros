@@ -1,7 +1,7 @@
 <launch>
     <!-- Detection configuration -->
-    <arg name="weights" default="yolov5m.pt" />
-    <arg name="data" default="$(find yolov5_ros)/src/yolov5/data/coco128.yaml" />
+    <arg name="weights" default="$(find yolov5_ros)/src/yolov5/data/weights/drone.pt" />
+    <arg name="data" default="$(find yolov5_ros)/src/yolov5/data/drone.yaml" />
     <arg name="confidence_threshold" default="0.75" />
     <arg name="iou_threshold" default="0.45" />
     <arg name="maximum_detections" default="1000" />
@@ -12,22 +12,22 @@
     <arg name="half" default="false" />
 
     <!-- replace imgsz -->
-    <arg name="inference_size_h" default="640" />
+    <arg name="inference_size_h" default="480" />
     <arg name="inference_size_w" default="640" />
 
     <!-- Visualize using OpenCV window -->
-    <arg name="view_image" default="true" />
+    <arg name="view_image" default="false" />
 
     <!-- ROS topics -->
-    <arg name="input_image_topic" default="/camera/color/image_raw/compressed" />
+    <arg name="input_image_topic" default="/typhoon_h480_1/combined_image" />
     <arg name="output_topic" default="/yolov5/detections" />
 
     <!-- Optional topic (publishing annotated image) -->
-    <arg name="publish_image" default="false" />
+    <arg name="publish_image" default="true" />
     <arg name="output_image_topic" default="/yolov5/image_out" />
 
 
-    <node pkg="yolov5_ros" name="detect" type="detect.py" output="screen">
+    <node pkg="yolov5_ros" name="detect" type="detect_ros.py" output="screen">
         <param name="weights" value="$(arg weights)" />
         <param name="data" value="$(arg data)" />
         <param name="confidence_threshold" value="$(arg confidence_threshold)" />

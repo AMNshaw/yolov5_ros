@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<launch>
+        <arg name="name" value="typhoon_h480"/>
+
+        <group ns="$(arg name)_1">
+                <include file="$(find yolov5_ros)/launch/yolov5.launch">
+                        <arg name="input_image_topic" value="/$(arg name)_1/combined_image"/>
+                </include>
+        </group>
+        <group ns="$(arg name)_2">
+                <include file="$(find yolov5_ros)/launch/yolov5.launch">
+                        <arg name="input_image_topic" value="/$(arg name)_2/combined_image"/>
+                </include>
+        </group>
+        <group ns="$(arg name)_3">
+                <include file="$(find yolov5_ros)/launch/yolov5.launch">
+                        <arg name="input_image_topic" value="/$(arg name)_3/combined_image"/>
+                </include>
+        </group>
+</launch>

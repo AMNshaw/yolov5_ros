@@ -101,6 +101,14 @@ class Yolov5Detector:
         # Initialize CV_Bridge
         self.bridge = CvBridge()
 
+    def unzipImg(self, image_org):
+        
+        imgL = image_org[:, :640]
+        imgR = image_org[:, 640:1280]
+        imgG = image_org[:, 1280:]
+        return imgL, imgR, imgG
+   
+
     def callback(self, data):
         """adapted from yolov5/detect.py"""
         # print(data.header)
@@ -108,7 +116,7 @@ class Yolov5Detector:
             im = self.bridge.compressed_imgmsg_to_cv2(data, desired_encoding="bgr8")
         else:
             im = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
-        
+    
         im, im0 = self.preprocess(im)
         # print(im.shape)
         # print(img0.shape)
